@@ -1,5 +1,5 @@
 1. System Architecture Diagram
-
+![System Architecture Diagram](images/diagram.png)
 The system consists of two systems:
 Client System: The host machine (Windows laptop)
 Server System: Ubuntu Server 24.04.3 LTS running inside VirtualBox
