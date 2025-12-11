@@ -1,5 +1,6 @@
 1. System Architecture Diagram
 ![System Architecture Diagram](images/diagram.png)
+
 The project uses a small virtualised environment built on my Windows laptop.
 The setup contains one server VM (Ubuntu Server 24.04.3 LTS) and one workstation VM (Debian 13 “Trixie”), both running inside VirtualBox with bridged networking enabled.
 This allows all machines to obtain real LAN IP addresses from my router and communicate with each other as if they were physical devices on the same network.
