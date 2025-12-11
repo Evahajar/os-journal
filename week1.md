@@ -92,7 +92,6 @@ Allows me to compare the experience between two major Linux families (Debian vs 
 
 Debian also gives me a clean environment to run Linux commands, test networking, and view logs without the overhead of a full Ubuntu Desktop.
 
-(Insert screenshots of Debian system specs here) :::
 4. Network Configuration Documentation: 
 Both VMs use Bridged Adapter mode.
 This mode allows the VMs to appear as separate devices on my home network, each receiving its own IP address via DHCP.
