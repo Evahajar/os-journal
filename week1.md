@@ -1,95 +1,131 @@
 1. System Architecture Diagram
 ![System Architecture Diagram](images/diagram.png)
-The system consists of two systems:
-Client System: The host machine (Windows laptop)
-Server System: Ubuntu Server 24.04.3 LTS running inside VirtualBox
+The project uses a small virtualised environment built on my Windows laptop.
+The setup contains one server VM (Ubuntu Server 24.04.3 LTS) and one workstation VM (Debian 13 “Trixie”), both running inside VirtualBox with bridged networking enabled.
+This allows all machines to obtain real LAN IP addresses from my router and communicate with each other as if they were physical devices on the same network.
 
-The host machine is used as the administration and client device, while the Ubuntu 
-Server virtual machine acts as the production server. Communication between the two 
-systems occurs over a bridged network, which allows the server to appear as a real 
-machine on the same local network.
+Architecture Overview:
 
-Architecture Description
+Host Machine (Windows laptop)
 
-The host machine connects to the server using:
-  -SSH (Port 22) for remote administration
-  -HTTP (Port 80) for web access to the Apache server
-The server VM runs in headless mode and provides:
-  -Web services (Apache)
-  -Secure remote access (SSH)
-  -Firewall protection (UFW)
-  -Intrusion prevention (Fail2Ban)
-  -Mandatory access control (AppArmor)
-This architecture reflects a real-world client–server deployment model and allows 
-proper testing of security, networking, and services.
+Runs VirtualBox
+
+Used for managing both VMs
+
+Connected to local LAN (e.g. 192.168.1.x)
+
+Server VM – Ubuntu Server 24.04.3 LTS
+
+IP Address: 192.168.1.221
+
+Services installed: OpenSSH, Apache2, UFW firewall, Fail2Ban, AppArmor
+
+Runs headless (no desktop environment)
+
+Workstation VM – Debian 13 (Trixie)
+
+IP Address: 192.168.1.183
+
+Used to compare distributions and test connectivity
+
+Lightweight GUI for easier workstation usage
 
 2. Distribution Selection & Justification
 
-The selected server operating system for this project is:
-  -Ubuntu Server 24.04.3 LTS (Noble)
-This distribution was chosen after comparison with alternative server operating 
-systems such as Debian Server and CentOS/Rocky Linux.
+For the server, I chose Ubuntu Server 24.04.3 LTS.
+This decision was based on stability, documentation quality, security support, and the fact that Ubuntu is widely used in industry and cloud platforms.
 
-Justification for Choosing Ubuntu Server
-  -Long-Term Support (LTS): Ubuntu Server 24.04 provides 5 years of security updates, 
-making it suitable for stable production deployment.
-  -Strong Community Support: Ubuntu has one of the largest Linux communities, ensuring 
-extensive documentation, tutorials, and troubleshooting resources.
-  -Excellent Package Management: The apt package manager is user-friendly, fast, and 
-reliable.
-  -Security Features Built-In: Native support for:
-    +UFW firewall
-    +AppArmor mandatory access control
-    +Fail2Ban compatibility
-  -Cloud and Enterprise Compatibility: Ubuntu is widely used in cloud platforms such as
-AWS and Azure.
+To justify the choice, I compared it with Debian, which I installed as my workstation VM.
 
-Comparison with Alternatives
-| Distribution             | Strengths                                              | Limitations                                                        |
-| ------------------------ | ------------------------------------------------------ | ------------------------------------------------------------------ |
-|   Ubuntu Server          | LTS support, easy package management, strong community | Slightly higher resource usage than minimal distros                |
-|   Debian Server          | Very stable, lightweight, secure                       | Older packages, slower updates                                     |
-|   CentOS / Rocky Linux   | Enterprise-grade, stable                               | More complex administration, no direct support after CentOS Stream |
+Ubuntu Server 24.04 LTS – Why I chose it
+
+Long-term support (5 years + extended security maintenance)
+
+Large package repository and excellent community documentation
+
+Very beginner-friendly while still used by professionals
+
+Strong security defaults: UFW firewall, AppArmor, unattended-upgrades
+
+Perfect for learning real-world server administration
+
+Debian 13 – Alternative distribution
+
+Debian is known for:
+
+Exceptional stability
+
+Very conservative software versions
+
+Strong reliability, often used in enterprise and embedded systems
+
+Fully community-driven (no commercial control)
+
+Comparison :
+| Feature          | Ubuntu Server          | Debian                   |
+| ---------------- | ---------------------- | ------------------------ |
+| Release Cycle    | Regular LTS releases   | Slow, stability-first    |
+| Default Security | UFW + AppArmor         | Depends on configuration |
+| Package Versions | Newer, more up to date | Older, extremely stable  |
+| Support          | Canonical + community  | Purely community-based   |
+| Learning Curve   | Easier for beginners   | More manual config       |
 
 
-Ubuntu Server was chosen as the best balance between stability, security, ease of use,
-and professional relevance.
+Conclusion:
+Ubuntu Server suits the coursework better because it offers quicker setup, accessible documentation, secure defaults, and modern tooling. Debian is excellent for workstation/learning use, but Ubuntu provides a smoother experience for server administration tasks.
 
 3. Workstation Configuration Decision
 
-The workstation used for this project is the host Windows laptop, rather than a second
-Linux desktop virtual machine.
+For my workstation VM, I selected Debian 13 (Trixie).
+My justification:
 
-Justification
- The Windows host already provides:
-  -A reliable SSH client
-  -A web browser for accessing the Apache server
-  -VirtualBox management tools
- Using the host avoids:
-  -Unnecessary resource usage from an extra desktop VM
-  -Additional network complexity
- This still fully satisfies the requirement of two systems:
-  -Client system: Windows host
-  -Server system: Ubuntu Server VM
-This approach reflects a realistic administration scenario, where system administrators
-often manage Linux servers remotely from Windows workstations.
+Lightweight GUI and minimal resource usage
 
-4. Network Configuration (VirtualBox & IP Addressing)
- VirtualBox Network Settings
-  Network Adapter Type: Bridged Adapter
-  Physical Interface: Wi-Fi Network Card
-  Purpose: To place the server directly on the same network as the host
- Server IP Address
-The server was automatically assigned the following IPv4 address: 192.168.1.221
-This allows:
-  Direct SSH access from the host
-  Direct browser access to Apache using HTTP
-  Realistic firewall and intrusion testing
-Active Services & Ports
-| Service | Port | Purpose                      |
-| ------- | ---- | ---------------------------- |
-| SSH     | 22   | Secure remote administration |
-| Apache  | 80   | Web server access            |
+Wide compatibility with VirtualBox
+
+Stable and predictable behaviour
+
+Works well as a client system when connecting to the Ubuntu Server
+
+Allows me to compare the experience between two major Linux families (Debian vs Ubuntu)
+
+Debian also gives me a clean environment to run Linux commands, test networking, and view logs without the overhead of a full Ubuntu Desktop.
+
+(Insert screenshots of Debian system specs here) :::
+4. Network Configuration Documentation: 
+Both VMs use Bridged Adapter mode.
+This mode allows the VMs to appear as separate devices on my home network, each receiving its own IP address via DHCP.
+
+This was essential for:
+
+SSH access from host to server
+
+Testing web services through the browser
+
+Simulating a realistic server–client environment
+Ubuntu Server Network Output (ip addr)
+
+[Ip Ubuntu](/images/ip.png)
+
+Shows:
+
+Interface: enp0s3
+
+IPv4 address: 192.168.1.221
+
+Confirms bridged networking is active
+
+Debian Network Output (ip addr)
+
+[Ip Debian](/images/ip1.png)
+
+Shows:
+
+IPv4 address: 192.168.1.183
+
+Also bridged, communicating on the same subnet
+
+This confirms both systems are correctly configured for coursework tasks.
 
 5. System Specifications Using CLI (Verification Evidence)
   System verification was completed using the required command-line tools.
@@ -128,12 +164,23 @@ lsb_release -a :
 ![OS Release](images/osrelease.png)
 
 Confirms Ubuntu Server 24.04.3 LTS (Noble).
+Debian Workstation – System Specifications
+uname -a
 
+[uname Debian](images/uname.png)
+
+free -h
+
+[free Debian](/images/free.png)
+
+df -h
+
+[df Debian](/images/debian_dfh.png)
+
+lsb_release -a
+
+[release Debian](/images/release.png)
 Reflection :
--This phase highlighted the importance of careful planning before system deployment.
-Choosing an LTS server distribution ensured long-term stability and security. The use 
-of bridged networking allowed the server to integrate seamlessly into the local network,
-making security and web services more realistic.
--Working with a headless server reinforced professional system administration practices
-and reduced the system’s attack surface. Using CLI tools to verify system specifications
-strengthened confidence in validating real server environments.
+This week helped me build a complete virtual environment from scratch and understand the differences between server and workstation distributions. Installing and configuring two different Linux systems allowed me to compare their behaviour directly and appreciate how design choices (like update frequency or security defaults) impact real-world server administration.
+
+Networking both machines through a bridged adapter gave me a realistic server–client relationship, where the Ubuntu server provided services and the Debian workstation acted as a testing and management system. I also reinforced my understanding of essential Linux commands and system introspection tools.
