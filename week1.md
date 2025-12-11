@@ -105,7 +105,7 @@ Testing web services through the browser
 Simulating a realistic server–client environment
 Ubuntu Server Network Output (ip addr)
 
-[Ip Ubuntu](images/ip.png)
+[Ip Ubuntu](./images/ip.png)
 
 Shows:
 
@@ -117,7 +117,7 @@ Confirms bridged networking is active
 
 Debian Network Output (ip addr)
 
-[Ip Debian](images/ip1.png)
+[Ip Debian](./images/ip1.png)
 
 Shows:
 
@@ -136,7 +136,7 @@ Confirms a 64-bit Linux kernel running on x86_64 architecture.
 
 Memory Usage 
 free -h :
-![Memory Usage](images/memoryusage.png)
+![Memory Usage](./images/memoryusage.png)
 -Total RAM: ~1.9 GB
 -Used: ~347 MB
 -Swap: Disabled
@@ -145,7 +145,7 @@ free -h :
 Disk Usage : 
 df -h :
 
-![Disk Usage](images/diskusage.png)
+![Disk Usage](./images/diskusage.png)
 
 Total Disk: 25 GB
 Used: ~12%
@@ -154,7 +154,7 @@ Free: ~21 GB
 Network Configuration
 ip addr :
 
-![IP address](images/ip.png)
+![IP address](./images/ip.png)
 
 Confirms the bridged interface and IPv4 address 192.168.1.221.
 
@@ -162,7 +162,7 @@ Operating System Verification
 
 lsb_release -a : 
 
-![OS Release](images/osrelease.png)
+![OS Release](./images/osrelease.png)
 
 Confirms Ubuntu Server 24.04.3 LTS (Noble).
 
@@ -170,19 +170,19 @@ Debian Workstation – System Specifications
 
 uname -a
 
-[uname Debian](images/uname1.png)
+[uname Debian](./images/uname1.png)
 
 free -h
 
-[free Debian](images/free.png)
+[free Debian](./images/free.png)
 
 df -h
 
-[df Debian](images/dfh.png)
+[df Debian](./images/dfh.png)
 
 lsb_release -a
 
-[release Debian](images/release.png)
+[release Debian](./images/release.png)
 
 Reflection :
 This week helped me build a complete virtual environment from scratch and understand the differences between server and workstation distributions. Installing and configuring two different Linux systems allowed me to compare their behaviour directly and appreciate how design choices (like update frequency or security defaults) impact real-world server administration.
