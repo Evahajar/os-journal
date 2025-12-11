@@ -1,0 +1,61 @@
+@import "jekyll-theme-cayman";
+
+/* Soft pastel background */
+body {
+  background: #fdf7fa; /* very light pink */
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Page container */
+.page-header {
+  background-color: #f4d7e3 !important; /* rose pink */
+  color: #5a3a45 !important; /* warm brown */
+  padding: 3rem 2rem;
+  border-bottom: 2px solid #e7bdcc;
+}
+
+/* Buttons / Links */
+button,
+a.btn {
+  background-color: #f4d7e3 !important;
+  border-color: #e7bdcc !important;
+  color: #5a3a45 !important;
+}
+
+a {
+  color: #b56576;
+}
+a:hover {
+  color: #8c475c;
+}
+
+/* Headings */
+h1, h2, h3 {
+  color: #5a3a45 !important;
+  font-weight: 600;
+}
+
+/* Page Content */
+.main-content {
+  background: #ffffff;
+  padding: 2rem;
+  margin-top: 20px;
+  border-radius: 12px;
+  border: 1px solid #f2d4df;
+  box-shadow: 0px 4px 12px rgba(200, 150, 170, 0.15);
+}
+
+/* Images */
+img {
+  border-radius: 10px;
+  border: 1px solid #f2d4df;
+  box-shadow: 0px 3px 10px rgba(180, 120, 140, 0.15);
+  margin: 10px 0;
+}
+
+/* Footer */
+footer {
+  color: #8c6f7a;
+  text-align: center;
+  padding: 1rem 0;
+}
