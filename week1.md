@@ -131,12 +131,16 @@ This confirms both systems are correctly configured for coursework tasks.
   System verification was completed using the required command-line tools.
 Kernel & Architecture
 uname -a :
+
  ![uname output](./images/sysinfo.png)
+ 
 Confirms a 64-bit Linux kernel running on x86_64 architecture.
 
 Memory Usage 
 free -h :
+
 ![Memory Usage](./images/memoryusage.png)
+
 -Total RAM: ~1.9 GB
 -Used: ~347 MB
 -Swap: Disabled
