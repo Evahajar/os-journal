@@ -18,6 +18,9 @@
     font-weight:600;">
     Next Week ➡
   </a>
+  <a href="../index.html">⬅️ Home</a>
+  &nbsp; | &nbsp;
+  <a href="week4.html">➡️ Next Week</a>
 </div>
 
 Week 3 – Process Management and System Monitoring
