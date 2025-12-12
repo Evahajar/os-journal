@@ -1,4 +1,4 @@
-Week 3 – Process Management and System Monitoring
+Week 3 – Application Selection for Performance Testing
 
 <div style="display:flex; gap:10px; margin-top:20px;">
 
@@ -25,7 +25,7 @@ Week 3 – Process Management and System Monitoring
   </a>
 
 </div>
-Week 3 – Application Selection for Performance Testing
+
 Introduction
 
 This phase focuses on selecting representative applications to evaluate system performance under different workload types. Before running any benchmarks or stress tests, it is essential to plan which applications will be used, what resources they are expected to consume, and how their behaviour will be monitored. This structured approach ensures that later performance testing is meaningful, controlled, and repeatable.
