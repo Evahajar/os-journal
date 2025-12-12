@@ -1,3 +1,5 @@
+Week 4 : Initial System Configuration & Security Implementation
+
 <div style="display:flex; gap:10px; margin-top:20px;">
 
   <a href="index.html" style="
@@ -23,4 +25,3 @@
   </a>
 
 </div>
-Week 4 : Process Management and Scheduling
