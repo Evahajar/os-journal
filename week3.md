@@ -25,118 +25,74 @@ Week 3 – Process Management and System Monitoring
   </a>
 
 </div>
-Overview
+Week 3 – Application Selection for Performance Testing
+Introduction
 
-This week focused on understanding how Linux manages processes and system resources at runtime. The aim was to observe active processes, monitor CPU and memory usage, manage background jobs, and control processes using command-line tools. All observations were carried out on the Ubuntu Server virtual machine.
+This phase focuses on selecting representative applications to evaluate system performance under different workload types. Before running any benchmarks or stress tests, it is essential to plan which applications will be used, what resources they are expected to consume, and how their behaviour will be monitored. This structured approach ensures that later performance testing is meaningful, controlled, and repeatable.
 
-1. Process Listing and Inspection
+The applications selected in this phase will be installed and executed in later weeks to analyse CPU usage, memory consumption, disk I/O, and network performance on the Ubuntu Server.
 
-To examine all running processes on the system, the following command was used:
+1. Application Selection Matrix
 
-ps aux
+To cover a broad range of real-world workloads, applications were selected to represent CPU-intensive, memory-intensive, I/O-intensive, network-intensive, and server-based workloads.
 
+| Application              | Workload Type     | Justification                                                                                                       |
+| ------------------------ | ----------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **stress-ng (CPU mode)** | CPU-intensive     | Generates controlled and repeatable CPU load, allowing analysis of processor utilisation and scheduling behaviour.  |
+| **stress-ng (VM mode)**  | Memory-intensive  | Allocates and stresses system memory, useful for observing RAM usage and potential swap behaviour.                  |
+| **fio**                  | I/O-intensive     | Industry-standard tool for benchmarking disk read/write performance and I/O latency.                                |
+| **iperf3**               | Network-intensive | Measures network bandwidth and throughput, suitable for testing network performance between workstation and server. |
+| **Apache2**              | Server workload   | Represents a realistic web server scenario, allowing evaluation of system behaviour under client request load.      |
 
-This command displays all processes for all users, including system services and kernel threads. The output showed that most processes were owned by root, which is expected on a server system, as critical services such as systemd, kernel workers (kworker), and device handlers run with elevated privileges.
-This demonstrated the separation between user-level processes and core system processes.
+These applications were chosen because they are lightweight, well-documented, and commonly used in both academic and industry environments.
 
-![Process list](images/psaux.png)
+2. Installation Documentation (Planned)
 
-2. Real-Time Process Monitoring
+All applications will be installed on the Ubuntu Server using SSH from the Debian workstation, in line with the administrative constraint of remote management only.
 
-To monitor processes dynamically, the top command was used:
+The planned installation commands are:
 
-top
-
-
-This tool provides a real-time view of:
-
-CPU usage
-
-Memory usage
-
-Load average
-
-Active and sleeping processes
-
-The system showed a very low load average, confirming that the server was mostly idle. Most CPU time was spent in the idle state, which is typical for a server not under heavy workload.
-
-![Top command](images/top.png)
-
-3. Memory Usage Analysis
-
-Memory usage was examined using:
-
-free -h
+sudo apt update
+sudo apt install stress-ng fio iperf3 apache2 -y
 
 
-The output showed:
+These commands will ensure that all required testing tools are installed using the official Ubuntu package repositories, maintaining system integrity and ease of updates.
 
-Total system memory of approximately 2 GB
+3. Expected Resource Profiles
 
-A large portion of memory available
+Before execution, it is important to define expected behaviour for each workload. This allows actual results to be compared against predictions in later analysis.
 
-No swap space in use
+stress-ng (CPU-intensive)
+Expected to drive CPU utilisation close to 100% across available cores, with minimal impact on disk and network activity.
 
-This confirmed that the system was operating efficiently and was not under memory pressure.
+stress-ng (Memory-intensive)
+Expected to consume a large portion of available RAM and potentially trigger swap usage if memory limits are reached.
 
-![Memory usage](images/free1.png)
+fio (I/O-intensive)
+Expected to generate high disk read/write activity, increased I/O wait times, and noticeable disk throughput changes.
 
-4. Virtual Memory and CPU Statistics
+iperf3 (Network-intensive)
+Expected to significantly increase network bandwidth usage while having minimal impact on disk usage and moderate CPU utilisation.
 
-To observe low-level system statistics, the following command was used:
+Apache2 (Server workload)
+Expected to show moderate CPU and memory usage under light load, increasing proportionally with concurrent client requests.
 
-vmstat
+4. Monitoring Strategy
 
+To measure system performance accurately, different monitoring tools will be used depending on the workload being tested.
 
-This provided insight into:
+| Application Type   | Monitoring Tools          | Purpose                                                                    |
+| ------------------ | ------------------------- | -------------------------------------------------------------------------- |
+| CPU workloads      | `top`, `htop`, `uptime`   | Monitor CPU usage, load averages, and process scheduling behaviour.        |
+| Memory workloads   | `free -h`, `vmstat`       | Observe memory allocation, availability, and swap activity.                |
+| Disk I/O workloads | `iostat`, `vmstat`        | Measure disk throughput, latency, and I/O wait times.                      |
+| Network workloads  | `iperf3`, `ss`, `iftop`   | Monitor network bandwidth, connections, and traffic flow.                  |
+| Server workloads   | `top`, Apache access logs | Evaluate server responsiveness and resource consumption under client load. |
 
-CPU activity
-
-Context switches
-
-Memory buffering and caching
-
-Swap usage
-
-The results showed no swap activity and minimal CPU load, further confirming stable system performance.
-
-![VMStat output](images/vmstat.png)
-
-5. Background Jobs and Process Control
-
-A background process was created using:
-
-sleep 300 &
-
-
-This command launched a process that runs in the background for 300 seconds.
-
-The running job was verified using:
-
-jobs
-
-![Sleep command](images/sleep.png)
-![Jobs output](images/jobs.png)
-
-6. Identifying and Terminating a Process
-
-To locate the background sleep process, the following command was used:
-
-ps aux | grep '[s]leep'
-
-
-This technique avoids matching the grep process itself and correctly identifies the target process along with its PID.
-
-The process was terminated using:
-
-kill <PID>
-
-
-After termination, the process no longer appeared in the process list, confirming successful process control.
-
-![Sleep process](images/psgrep.png)
-![Kill process](images/kill.png)
+This monitoring strategy ensures that each application is measured using appropriate tools, providing accurate and relevant performance data.
 
 Reflection
 
-This week provided practical insight into how Linux manages processes and system resources. Learning how to interpret ps, top, and vmstat outputs made it easier to understand system behaviour in real time. Managing background jobs and terminating processes reinforced core system administration skills that are essential for server maintenance and troubleshooting.
+Planning application selection before executing performance tests helps prevent misleading results and uncontrolled testing. By defining expected resource profiles and monitoring strategies in advance, it becomes easier to identify abnormal behaviour, bottlenecks, or performance limitations when tests are later executed.
+
+This phase highlights the importance of separating design from implementation, ensuring that performance testing in later weeks is structured, repeatable, and aligned with real-world system administration practices.
