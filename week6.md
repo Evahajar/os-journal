@@ -174,7 +174,6 @@ CPU-intensive processes were executed with lower scheduling priority using `nice
 ### Optimisation Impact Visualisation
 
 ```mermaid
-bar
   pie title Performance Before vs After Optimisation
     "CPU Load Before" : 1.35
     "CPU Load After" : 1.0
