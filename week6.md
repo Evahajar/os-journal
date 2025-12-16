@@ -123,14 +123,11 @@ Network throughput and latency were measured using `iperf3` and `ping`. The serv
 ### Load vs Baseline Comparison (CPU & Memory)
 
 ```mermaid
-bar
-  title Baseline vs Load
-  x-axis Scenario
-  y-axis Value
-  "CPU Load Baseline" : 0.05
-  "CPU Load Under Load" : 1.35
-  "Memory Used Baseline (MB)" : 341
-  "Memory Used Under Load (MB)" : 366
+  pie title Baseline Resource Usage
+    "CPU Idle %" : 95
+    "Memory Used (MB)" : 341
+    "Available Memory (MB)" : 1600
+
 ```
 
 ---
@@ -178,13 +175,12 @@ CPU-intensive processes were executed with lower scheduling priority using `nice
 
 ```mermaid
 bar
-  title Performance Before vs After Optimisation
-  x-axis Metric
-  y-axis Value
-  "CPU Load Before" : 1.35
-  "CPU Load After" : 1.0
-  "Latency Before (ms)" : 6
-  "Latency After (ms)" : 5
+  pie title Performance Before vs After Optimisation
+    "CPU Load Before" : 1.35
+    "CPU Load After" : 1.0
+    "Latency Before (ms)" : 6
+    "Latency After (ms)" : 5
+
 ```
 
 ---
