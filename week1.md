@@ -1,221 +1,260 @@
-Week 1 : System Planning & Distribution Selection
+````md
+# 🌸 Week 1: System Planning & Distribution Selection
 
-<div style="display:flex; gap:10px; margin-top:20px;">
-  <a href="index.html" style="
-     background:#f4d7e3;
-     padding:10px 18px;
-     color:#5a3a45;
-     border-radius:8px;
-     text-decoration:none;
-     border:1px solid #e7bdcc;
-     font-weight:600;">
-     ⬅ Back to Home
-  </a>
+[⬅ Back to Home](index.html)  [➡ Go to Week 2](week2.html)
 
-  <a href="week2.html" style="
-     background:#f4d7e3;
-     padding:10px 18px;
-     color:#5a3a45;
-     border-radius:8px;
-     text-decoration:none;
-     border:1px solid #e7bdcc;
-     font-weight:600;">
-     ➡ Go to Week 2
-  </a>
-</div>
+---
 
-1. System Architecture Diagram
+## 🖥️ 1. System Architecture Diagram
+
 ![System Architecture Diagram](images/diagram.png)
 
-The project uses a small virtualised environment built on my Windows laptop.
-The setup contains one server VM (Ubuntu Server 24.04.3 LTS) and one workstation VM (Debian 13 “Trixie”), both running inside VirtualBox with bridged networking enabled.
-This allows all machines to obtain real LAN IP addresses from my router and communicate with each other as if they were physical devices on the same network.
+The project uses a **small virtualised environment** built on my Windows laptop.  
+The setup consists of:
 
-Architecture Overview:
+- **One server VM**: Ubuntu Server 24.04.3 LTS  
+- **One workstation VM**: Debian 13 (Trixie)
 
-Host Machine (Windows laptop)
+Both virtual machines run inside **VirtualBox** using **Bridged Networking**, allowing them to obtain real LAN IP addresses from the router and communicate as if they were physical devices on the same network.
 
-Runs VirtualBox
+---
 
-Used for managing both VMs
+### 📐 Architecture Overview
 
-Connected to local LAN (e.g. 192.168.1.x)
+#### 🧑‍💻 Host Machine (Windows Laptop)
+- Runs Oracle VirtualBox  
+- Manages both virtual machines  
+- Connected to the local LAN (e.g. `192.168.1.x`)
 
-Server VM – Ubuntu Server 24.04.3 LTS
+#### 🗄️ Server VM – Ubuntu Server 24.04.3 LTS
+- **IP Address:** `192.168.1.221`
+- **Installed services:**
+  - OpenSSH  
+  - Apache2  
+  - UFW Firewall  
+  - Fail2Ban  
+  - AppArmor  
+- Runs in **headless mode** (no desktop environment)
 
-IP Address: 192.168.1.221
+#### 💻 Workstation VM – Debian 13 (Trixie)
+- **IP Address:** `192.168.1.183`
+- Used to compare distributions and test connectivity  
+- Lightweight GUI for ease of use
 
-Services installed: OpenSSH, Apache2, UFW firewall, Fail2Ban, AppArmor
+---
 
-Runs headless (no desktop environment)
+## 📦 2. Distribution Selection & Justification
 
-Workstation VM – Debian 13 (Trixie)
+For the server environment, **Ubuntu Server 24.04.3 LTS** was selected based on its **stability, security features, and documentation quality**, as well as its widespread use in industry and cloud platforms.
 
-IP Address: 192.168.1.183
+To justify this choice, Ubuntu Server was compared with **Debian**, which was installed as the workstation VM.
 
-Used to compare distributions and test connectivity
+---
 
-Lightweight GUI for easier workstation usage
+### ✅ Ubuntu Server 24.04 LTS – Rationale
+- Long-Term Support (5 years + extended security maintenance)
+- Large package repositories and strong community documentation
+- Beginner-friendly while still used professionally
+- Secure defaults:
+  - UFW firewall  
+  - AppArmor  
+  - Unattended security updates
+- Suitable for learning real-world server administration
 
-2. Distribution Selection & Justification
+---
 
-For the server, I chose Ubuntu Server 24.04.3 LTS.
-This decision was based on stability, documentation quality, security support, and the fact that Ubuntu is widely used in industry and cloud platforms.
-
-To justify the choice, I compared it with Debian, which I installed as my workstation VM.
-
-Ubuntu Server 24.04 LTS – Why I chose it
-
-Long-term support (5 years + extended security maintenance)
-
-Large package repository and excellent community documentation
-
-Very beginner-friendly while still used by professionals
-
-Strong security defaults: UFW firewall, AppArmor, unattended-upgrades
-
-Perfect for learning real-world server administration
-
-Debian 13 – Alternative distribution
-
+### 🔁 Debian 13 (Trixie) – Alternative Distribution
 Debian is known for:
+- Exceptional stability  
+- Conservative software updates  
+- Strong reliability in enterprise systems  
+- Fully community-driven development
 
-Exceptional stability
+---
 
-Very conservative software versions
+### 📊 Distribution Comparison
 
-Strong reliability, often used in enterprise and embedded systems
+| Feature            | Ubuntu Server           | Debian                    |
+|--------------------|-------------------------|---------------------------|
+| Release Cycle      | Regular LTS releases    | Slow, stability-first     |
+| Default Security   | UFW + AppArmor          | Manual configuration      |
+| Package Versions   | Newer and up to date    | Older but very stable     |
+| Support            | Canonical + community   | Community-based only      |
+| Learning Curve     | Easier for beginners    | More manual setup         |
 
-Fully community-driven (no commercial control)
+---
 
-Comparison :
-| Feature          | Ubuntu Server          | Debian                   |
-| ---------------- | ---------------------- | ------------------------ |
-| Release Cycle    | Regular LTS releases   | Slow, stability-first    |
-| Default Security | UFW + AppArmor         | Depends on configuration |
-| Package Versions | Newer, more up to date | Older, extremely stable  |
-| Support          | Canonical + community  | Purely community-based   |
-| Learning Curve   | Easier for beginners   | More manual config       |
+### 🧠 Conclusion
+Ubuntu Server was better suited for this coursework due to its **faster setup**, **secure defaults**, and **accessible documentation**. Debian remains an excellent choice for workstation use, but Ubuntu provides a smoother experience for server-focused tasks.
 
+---
 
-Conclusion:
-Ubuntu Server suits the coursework better because it offers quicker setup, accessible documentation, secure defaults, and modern tooling. Debian is excellent for workstation/learning use, but Ubuntu provides a smoother experience for server administration tasks.
+## 🧩 3. Workstation Configuration Decision
 
-3. Workstation Configuration Decision
+The workstation VM uses **Debian 13 (Trixie)** for the following reasons:
 
-For my workstation VM, I selected Debian 13 (Trixie).
-My justification:
+- Lightweight GUI and low resource usage  
+- High compatibility with VirtualBox  
+- Stable and predictable behaviour  
+- Effective client system when connecting to Ubuntu Server  
+- Enables comparison between two major Linux distributions (Debian vs Ubuntu)
 
-Lightweight GUI and minimal resource usage
+Debian provides a clean environment for running Linux commands, testing networking, and analysing logs without unnecessary overhead.
 
-Wide compatibility with VirtualBox
+---
 
-Stable and predictable behaviour
+## 🌐 4. Network Configuration Documentation
 
-Works well as a client system when connecting to the Ubuntu Server
+Both virtual machines use **Bridged Adapter mode** in VirtualBox.
 
-Allows me to compare the experience between two major Linux families (Debian vs Ubuntu)
+This allows:
+- Each VM to appear as a separate device on the local network  
+- Automatic IP assignment via DHCP  
+- Realistic server–client communication
 
-Debian also gives me a clean environment to run Linux commands, test networking, and view logs without the overhead of a full Ubuntu Desktop.
+---
 
-4. Network Configuration Documentation: 
-Both VMs use Bridged Adapter mode.
-This mode allows the VMs to appear as separate devices on my home network, each receiving its own IP address via DHCP.
+### 🔧 Purpose of Bridged Networking
+- SSH access from host to server  
+- Testing web services via browser  
+- Simulating a real-world network environment
 
-This was essential for:
+---
 
-SSH access from host to server
+### 🖧 Ubuntu Server Network Output (`ip addr`)
 
-Testing web services through the browser
+![Ubuntu IP](./images/ip.png)
 
-Simulating a realistic server–client environment
-Ubuntu Server Network Output (ip addr)
+**Observed:**
+- Interface: `enp0s3`  
+- IPv4 Address: `192.168.1.221`  
+- Confirms bridged networking is active
 
-![Ip Ubuntu](./images/ip.png)
+---
 
-Shows:
+### 🖧 Debian Workstation Network Output (`ip addr`)
 
-Interface: enp0s3
+![Debian IP](./images/ip1.png)
 
-IPv4 address: 192.168.1.221
-
-Confirms bridged networking is active
-
-Debian Network Output (ip addr)
-
-![Ip Debian](./images/ip1.png)
-
-Shows:
-
-IPv4 address: 192.168.1.183
-
-Also bridged, communicating on the same subnet
+**Observed:**
+- IPv4 Address: `192.168.1.183`  
+- Same subnet as the server VM  
 
 This confirms both systems are correctly configured for coursework tasks.
 
-5. System Specifications Using CLI (Verification Evidence)
-  System verification was completed using the required command-line tools.
-Kernel & Architecture
-uname -a :
+---
 
- ![uname output](./images/sysinfo.png)
- 
-Confirms a 64-bit Linux kernel running on x86_64 architecture.
+## 🧪 5. System Specifications Using CLI (Verification Evidence)
 
-Memory Usage 
-free -h :
+System verification was completed using the required command-line tools.
+
+---
+
+### 🧠 Kernel & Architecture
+```bash
+uname -a
+````
+
+![uname output](./images/sysinfo.png)
+
+Confirms a **64-bit Linux kernel** running on `x86_64` architecture.
+
+---
+
+### 🧮 Memory Usage
+
+```bash
+free -h
+```
 
 ![Memory Usage](./images/memoryusage.png)
 
--Total RAM: ~1.9 GB
--Used: ~347 MB
--Swap: Disabled
-  This confirms the system is lightweight and efficient.
+* Total RAM: ~1.9 GB
+* Used: ~347 MB
+* Swap: Disabled
 
-Disk Usage : 
-df -h :
+This confirms the system is lightweight and efficient.
+
+---
+
+### 💾 Disk Usage
+
+```bash
+df -h
+```
 
 ![Disk Usage](./images/diskusage.png)
 
-Total Disk: 25 GB
-Used: ~12%
-Free: ~21 GB
+* Total Disk: 25 GB
+* Used: ~12%
+* Free: ~21 GB
 
-Network Configuration
-ip addr :
+---
+
+### 🌐 Network Configuration
+
+```bash
+ip addr
+```
 
 ![IP address](./images/ip.png)
 
-Confirms the bridged interface and IPv4 address 192.168.1.221.
+Confirms the bridged interface and IPv4 address `192.168.1.221`.
 
-Operating System Verification
+---
 
-lsb_release -a : 
+### 🏷️ Operating System Verification
+
+```bash
+lsb_release -a
+```
 
 ![OS Release](./images/osrelease.png)
 
-Confirms Ubuntu Server 24.04.3 LTS (Noble).
+Confirms **Ubuntu Server 24.04.3 LTS (Noble)**.
 
-Debian Workstation – System Specifications
+---
 
+## 💻 Debian Workstation – System Specifications
+
+### Kernel
+
+```bash
 uname -a
+```
 
 ![uname Debian](./images/uname1.png)
 
+### Memory
+
+```bash
 free -h
+```
 
 ![free Debian](./images/free.png)
 
+### Disk
+
+```bash
 df -h
+```
 
 ![df Debian](./images/dfh.png)
 
+### OS Release
+
+```bash
 lsb_release -a
+```
 
 ![release Debian](./images/release.png)
 
-Reflection :
-This week helped me build a complete virtual environment from scratch and understand the differences between server and workstation distributions. Installing and configuring two different Linux systems allowed me to compare their behaviour directly and appreciate how design choices (like update frequency or security defaults) impact real-world server administration.
+---
 
-Networking both machines through a bridged adapter gave me a realistic server–client relationship, where the Ubuntu server provided services and the Debian workstation acted as a testing and management system. I also reinforced my understanding of essential Linux commands and system introspection tools.
+## 🪞 Reflection
+
+This week involved building a **complete virtual environment from scratch** and understanding the differences between **server and workstation Linux distributions**.
+Configuring two different systems enabled direct comparison and highlighted how design choices, such as update frequency and security defaults, influence real-world server administration.
+
+
 
