@@ -69,13 +69,7 @@ Baseline measurements were collected while the system was idle to establish a re
 
 ### Baseline Visualisation (CPU & Memory)
 
-```mermaid
-  pie title Baseline Resource Usage
-    "CPU Idle %" : 95
-    "Memory Used (MB)" : 341
-    "Available Memory (MB)" : 1600
-
-```
+![](images/baseline.png)
 
 ---
 
@@ -120,13 +114,7 @@ Network throughput and latency were measured using `iperf3` and `ping`. The serv
 
 ### Load vs Baseline Comparison (CPU & Memory)
 
-```mermaid
-  pie title Baseline Resource Usage
-    "CPU Idle %" : 95
-    "Memory Used (MB)" : 341
-    "Available Memory (MB)" : 1600
-
-```
+![](images/load.png)
 
 ---
 
@@ -171,14 +159,7 @@ CPU-intensive processes were executed with lower scheduling priority using `nice
 
 ### Optimisation Impact Visualisation
 
-```mermaid
-  pie title Performance Before vs After Optimisation
-    "CPU Load Before" : 1.35
-    "CPU Load After" : 1.0
-    "Latency Before (ms)" : 6
-    "Latency After (ms)" : 5
-
-```
+![](impact.png)
 
 ---
 
