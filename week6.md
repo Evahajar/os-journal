@@ -70,13 +70,11 @@ Baseline measurements were collected while the system was idle to establish a re
 ### Baseline Visualisation (CPU & Memory)
 
 ```mermaid
-bar
-  title Baseline Resource Usage
-  x-axis Metric
-  y-axis Value
-  "CPU Idle %" : 95
-  "Memory Used (MB)" : 341
-  "Available Memory (MB)" : 1600
+  pie title Baseline Resource Usage
+    "CPU Idle %" : 95
+    "Memory Used (MB)" : 341
+    "Available Memory (MB)" : 1600
+
 ```
 
 ---
