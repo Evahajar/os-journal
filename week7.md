@@ -1,4 +1,4 @@
-# 🔐 Week 7 – Security Audit and System Evaluation
+# Week 7 – Security Audit and System Evaluation
 
 <div style="display:flex; gap:10px; margin-top:20px;">
 
