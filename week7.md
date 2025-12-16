@@ -58,7 +58,7 @@ Malware scanner : Not installed
 
 The system achieved a hardening index of **64**, indicating a solid security baseline. The firewall was correctly detected as active. Lynis highlighted the absence of a malware scanner, which was documented as a potential improvement rather than a critical vulnerability. No severe security misconfigurations were identified.
 
-📸 **Screenshot placement:**
+![](/images/inilynisau.png)
 
 * Lynis audit summary and hardening index
 
@@ -96,7 +96,7 @@ This confirmed:
 
 The results confirm that only SSH is exposed externally. All other ports are filtered by the firewall. The SSH service is running a modern and supported version, reducing exposure to known vulnerabilities.
 
-📸 **Screenshot placement:**
+![](images/nmapdeb.png)
 
 * Nmap SYN scan results
 * Nmap service/version detection
@@ -124,7 +124,7 @@ AllowUsers eva adminuser
 
 This configuration enforces strong SSH security by disabling root login, preventing password-based authentication, enforcing public key authentication, and restricting access to authorised users only.
 
-📸 **Screenshot placement:**
+![](images/securityveri.png)
 
 * SSH security verification output
 
@@ -142,7 +142,7 @@ systemctl list-units --type=service --state=running
 
 Key services identified include SSH for remote administration, Fail2Ban for intrusion prevention, system logging services, unattended upgrades for automatic security updates, and essential system and network management services. No unnecessary or insecure services were identified.
 
-📸 **Screenshot placement:**
+![](images/si.png)
 
 * Running services list
 
@@ -160,8 +160,7 @@ ss -tulnp
 
 The output confirmed that SSH is the only service listening on a public-facing interface. All other services are bound to localhost or internal interfaces, reducing the system’s attack surface.
 
-📸 **Screenshot placement:**
-
+![](images/tulnp.png)
 * Listening ports output (`ss -tulnp`)
 
 ---
